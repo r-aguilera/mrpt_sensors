@@ -255,12 +255,15 @@ void GenericSensorNode::process_observation(
     }
 
     // Publish tf?
-    if (publish_sensor_pose_tf_)
+    if (publish_sensor_pose_tf_ && robot_frame_id_ != sensor_frame_id_)
     {
+        ASSERT_(!robot_frame_id_.empty());
+        ASSERT_(!sensor_frame_id_.empty());
+
         geometry_msgs::msg::TransformStamped tf;
         tf.header.stamp = get_clock()->now();
-        tf.header.frame_id = this->robot_frame_id_;
-        tf.child_frame_id = this->sensor_frame_id_;
+        tf.header.frame_id = robot_frame_id_;
+        tf.child_frame_id = sensor_frame_id_;
 
         // Set translation
         tf.transform =
