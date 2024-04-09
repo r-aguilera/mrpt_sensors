@@ -9,29 +9,27 @@ ROS nodes for various robotics sensors via mrpt-hwdrivers.
 
 All packages follow [REP-2003](https://ros.org/reps/rep-2003.html) regarding ROS 2 topic QoS.
 
+<!-- md_toc github  < README.md -->
+
 # Table of Contents
-* [mrpt_sensors](#mrpt_sensors)
-* [`mrpt_sensor_bumblebee_stereo`](#`mrpt_sensor_bumblebee_stereo`)
-	* [Usage](#Usage)
-	* [Launch arguments](#Launch-arguments)
-* [`mrpt_sensor_gnns_nmea`](#`mrpt_sensor_gnns_nmea`)
-	* [Usage](#Usage)
-	* [Launch arguments](#Launch-arguments)
-* [`mrpt_sensor_velodyne`](#`mrpt_sensor_velodyne`)
-* [Individual package build status](#Individual-package-build-status)
+- [`mrpt_sensor_bumblebee_stereo`](#mrpt_sensor_bumblebee_stereo)
+- [`mrpt_sensor_gnns_nmea`](#mrpt_sensor_gnns_nmea)
+- [`mrpt_sensor_imu_xsens`](#mrpt_sensor_imu_xsens)
+- [`mrpt_sensor_velodyne`](#mrpt_sensor_velodyne)
+- [Individual package build status](#individual-package-build-status)
 
 # `mrpt_sensor_bumblebee_stereo`
 
 ROS 2 node for Bumblebee Stereo Cameras using libdc1394 interface.
 
-## Usage
 Supported models: Bumblebee2 stereo cameras with FireWire connection.
 
 ```bash
 ros2 launch mrpt_sensor_bumblebee_stereo mrpt_sensor_bumblebee_stereo.launch.py
 ```
 
-## Launch arguments
+<details>
+  <summary>Launch arguments</summary>
 
 ```yaml
 ros2 launch mrpt_sensor_bumblebee_stereo mrpt_sensor_bumblebee_stereo.launch.py --show-args
@@ -100,12 +98,12 @@ Arguments (pass arguments as '<name>:=<value>'):
     'log_level':
         Logging level
         (default: 'INFO')
-``` 
+```
+</details>
 
 
 # `mrpt_sensor_gnns_nmea`
 
-## Usage
 Supported models: any GPS/GNNS sensor emiting NMEA messages via a serial/USB port.
 
 ```bash
@@ -122,7 +120,9 @@ Parsed messages (via [mrpt::hwdrivers::CGPSInterface](https://docs.mrpt.org/refe
 - NMEA_VTG
 - NMEA_ZDA
 
-## Launch arguments
+
+<details>
+  <summary>Launch arguments</summary>
 
 ```yaml
 ros2 launch mrpt_sensor_gnns_nmea mrpt_sensor_gnns_nmea.launch.py --show-args
@@ -172,6 +172,84 @@ Arguments (pass arguments as '<name>:=<value>'):
         Logging level
         (default: 'INFO')
 ```
+</details>
+
+
+# `mrpt_sensor_imu_xsens`
+
+Supported models: MT4
+
+```bash
+ros2 launch mrpt_sensor_imu_xsens mrpt_sensor_imu_xsens.launch.py
+```
+
+<details>
+  <summary>Launch arguments</summary>
+
+```yaml
+ros2 launch mrpt_sensor_imu_xsens mrpt_sensor_imu_xsens.launch.py --show-args
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'process_rate':
+        Rate (Hz) for the process() main sensor loop.
+        (default: '"120"')
+
+    'out_rawlog_prefix':
+        If not empty, a .rawlog file will be created with all recorded data, apart of publishing it as ROS messages.
+        (default: '')
+
+    'publish_mrpt_obs_topic':
+        If not empty, mrpt_msgs/GenericObservation messages will be published to this topic name with the binary serialization of mrtp::obs::CObservation objects from the sensor.
+        (default: '')
+
+    'publish_topic':
+        If not empty, messages of type sensor_msg/Image will be published to this topic (plus suffix "_left"/"_right") for each sensor observation.
+        (default: 'sensor')
+
+    'sensor_frame_id':
+        The sensor frame_id name. Used to populate msg header and to publish to /tf too.
+        (default: 'imu')
+
+    'robot_frame_id':
+        The robot frame_id name. Used to publish the sensor pose to /tf.
+        (default: 'base_link')
+
+    'port_name':
+        Serial port to open, like USB002:005, etc. Default: open first IMU device.
+        (default: '')
+
+    'sensor_pose_x':
+        Sensor pose coordinate on the vehicle frame.
+        (default: '"0.0"')
+
+    'sensor_pose_y':
+        Sensor pose coordinate on the vehicle frame.
+        (default: '"0.0"')
+
+    'sensor_pose_z':
+        Sensor pose coordinate on the vehicle frame.
+        (default: '"0.0"')
+
+    'sensor_pose_yaw':
+        Sensor pose coordinate on the vehicle frame (degrees).
+        (default: '"0.0"')
+
+    'sensor_pose_pitch':
+        Sensor pose coordinate on the vehicle frame (degrees).
+        (default: '"0.0"')
+
+    'sensor_pose_roll':
+        Sensor pose coordinate on the vehicle frame (degrees).
+        (default: '"0.0"')
+
+    'log_level':
+        Logging level
+        (default: 'INFO')
+
+```
+</details>
+
+
 
 # `mrpt_sensor_velodyne`
 

@@ -59,7 +59,7 @@ external_images_own_thread  = true
 namespace
 {
 // We will emit two ROS messages per stereo observation.
-void process_gps(
+void process_stereo(
     mrpt_sensors::GenericSensorNode& node,
     const mrpt::obs::CObservation::Ptr& obs)
 {
@@ -106,8 +106,9 @@ int main(int argc, char** argv)
             std::make_shared<mrpt_sensors::GenericSensorNode>(node_name);
 
         node->custom_process_sensor =
-            [&node](const mrpt::obs::CObservation::Ptr& o)
-        { process_gps(*node, o); };
+            [&node](const mrpt::obs::CObservation::Ptr& o) {
+                process_stereo(*node, o);
+            };
 
         node->init(
             sensorConfig,
