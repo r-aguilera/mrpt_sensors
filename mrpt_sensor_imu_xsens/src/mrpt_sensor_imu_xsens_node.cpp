@@ -39,7 +39,7 @@ pose_y       = ${SENSOR_POSE_Y}
 pose_z       = ${SENSOR_POSE_Z}
 pose_yaw     = ${SENSOR_POSE_YAW}      // (deg)
 pose_pitch   = ${SENSOR_POSE_PITCH}
-pose_z       = ${SENSOR_POSE_ROLL}
+pose_roll    = ${SENSOR_POSE_ROLL}
 
 )"""";
 
