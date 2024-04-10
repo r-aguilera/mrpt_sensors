@@ -104,6 +104,7 @@ class GenericSensorNode : public rclcpp::Node
     std::string sensor_frame_id_ = "sensor";
     std::string robot_frame_id_ = "base_link";
     bool publish_sensor_pose_tf_ = true;
+    double publish_sensor_pose_tf_minimum_period_ = 0.1;  // [s]
 
     std::string publish_mrpt_obs_topic_ = "sensor_mrpt";
     std::string publish_topic_ = "sensor";
@@ -112,11 +113,14 @@ class GenericSensorNode : public rclcpp::Node
 
     mrpt::hwdrivers::CGenericSensor::Ptr sensor_;
 
+    double stamp_last_tf_publish_ = 0;
+
     rclcpp::Publisher<mrpt_msgs::msg::GenericObservation>::SharedPtr
         obs_publisher_;
 
     void process_observation(const mrpt::obs::CObservation::Ptr& o);
 
     void process(const mrpt::obs::CObservationGPS& o);
+    void process(const mrpt::obs::CObservationIMU& o);
 };
 }  // namespace mrpt_sensors
