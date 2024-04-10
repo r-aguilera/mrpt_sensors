@@ -11,6 +11,7 @@
 //
 #include <mrpt/config/CConfigFileBase.h>
 #include <mrpt/hwdrivers/CGenericSensor.h>
+#include <mrpt/io/CFileGZOutputStream.h>
 #include <mrpt/obs/obs_frwds.h>
 #include <tf2_ros/transform_broadcaster.h>
 
@@ -100,6 +101,7 @@ class GenericSensorNode : public rclcpp::Node
    private:
     // ----------------- ROS 2 params -----------------
     std::string out_rawlog_prefix_;
+    std::optional<mrpt::io::CFileGZOutputStream> out_rawlog_;
 
     std::string sensor_frame_id_ = "sensor";
     std::string robot_frame_id_ = "base_link";

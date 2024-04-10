@@ -57,7 +57,7 @@ int main(int argc, char** argv)
             sensorConfig,
             {
                 {"process_rate", "PROCESS_RATE", "80", false},
-                {"sensor_label", "SENSOR_LABEL", "stereo", false},
+                {"sensor_label", "SENSOR_LABEL", "imu", false},
                 {"port_name", "PORT_NAME", "", false},
 
                 {"sensor_pose_x", "SENSOR_POSE_X", "0", false},

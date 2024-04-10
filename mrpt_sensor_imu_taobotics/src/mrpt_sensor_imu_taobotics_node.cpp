@@ -52,7 +52,7 @@ int main(int argc, char** argv)
             sensorConfig,
             {
                 {"process_rate", "PROCESS_RATE", "500", false},
-                {"sensor_label", "SENSOR_LABEL", "stereo", false},
+                {"sensor_label", "SENSOR_LABEL", "imu", false},
                 {"serial_port", "SERIAL_PORT", "", true},
                 {"sensor_model", "SENSOR_MODEL", "hfi-a9", false},
 

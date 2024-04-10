@@ -51,6 +51,11 @@ def generate_launch_description():
             default_value='base_link',
             description='The robot frame_id name. Used to publish the sensor pose to /tf.'
         ),
+        DeclareLaunchArgument(
+            'sensor_label',
+            default_value='sensor',
+            description='The sensorLabel field of mrpt::obs::CObservation: a "name" for the sensor.'
+        ),
 
         # PARAMS FOR THIS NODE:
         # --------------------------------------------
@@ -122,6 +127,7 @@ def generate_launch_description():
                 {'publish_topic': LaunchConfiguration('publish_topic')},
                 {'sensor_frame_id': LaunchConfiguration('sensor_frame_id')},
                 {'robot_frame_id': LaunchConfiguration('robot_frame_id')},
+                {'sensor_label': LaunchConfiguration('sensor_label')},
 
                 # ------------------------------------------------
                 # node params:
