@@ -180,19 +180,22 @@ void GenericSensorNode::init(
             mrpt::system::TTimeParts parts;
             mrpt::system::timestampToParts(mrpt::Clock::now(), parts, true);
             rawlog_postfix += mrpt::format(
-                "%04u-%02u-%02u_%02uh%02um%02us", (unsigned int)parts.year,
-                (unsigned int)parts.month, (unsigned int)parts.day,
-                (unsigned int)parts.hour, (unsigned int)parts.minute,
-                (unsigned int)parts.second);
+                "%04u-%02u-%02u_%02uh%02um%02us.rawlog",
+                (unsigned int)parts.year, (unsigned int)parts.month,
+                (unsigned int)parts.day, (unsigned int)parts.hour,
+                (unsigned int)parts.minute, (unsigned int)parts.second);
 
             rawlog_postfix =
                 mrpt::system::fileNameStripInvalidChars(rawlog_postfix);
 
             const std::string fil = out_rawlog_prefix_ + rawlog_postfix;
-            // auto out_arch = archiveFrom(out_rawlog_);
+
             RCLCPP_INFO(
                 this->get_logger(), "Writing rawlog to file: `%s`",
                 fil.c_str());
+
+            out_rawlog_.emplace(fil);
+            ASSERT_(out_rawlog_->is_open());
         }
     }
     catch (const std::exception& e)
@@ -285,6 +288,13 @@ void GenericSensorNode::process_observation(
         tf_bc_->sendTransform(tf);
 
         stamp_last_tf_publish_ = tNow;
+    }
+
+    // Save to .rawlog?
+    if (out_rawlog_.has_value())
+    {
+        auto out_arch = mrpt::serialization::archiveFrom(*out_rawlog_);
+        out_arch << *o;
     }
 
     // custom handling?
