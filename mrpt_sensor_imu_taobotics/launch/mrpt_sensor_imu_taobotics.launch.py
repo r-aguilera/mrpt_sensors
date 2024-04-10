@@ -37,7 +37,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'publish_topic',
             default_value='sensor',
-            description='If not empty, messages of type sensor_msg/Image will be published to this topic (plus suffix "_left"/"_right") for each sensor observation.'
+            description='If not empty, messages of type sensor_msg/Imu will be published to this topic for each sensor observation.'
         ),
 
         DeclareLaunchArgument(

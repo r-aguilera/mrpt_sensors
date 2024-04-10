@@ -294,7 +294,7 @@ Arguments (pass arguments as '<name>:=<value>'):
         (default: '')
 
     'publish_topic':
-        If not empty, messages of type sensor_msg/Image will be published to this topic (plus suffix "_left"/"_right") for each sensor observation.
+        If not empty, messages of type sensor_msg/Imu will be published to this topic for each sensor observation.
         (default: 'sensor')
 
     'sensor_frame_id':
