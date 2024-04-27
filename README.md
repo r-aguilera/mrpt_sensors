@@ -15,7 +15,6 @@ All packages follow [REP-2003](https://ros.org/reps/rep-2003.html) regarding ROS
 - [`mrpt_sensor_bumblebee_stereo`](#mrpt_sensor_bumblebee_stereo)
 - [`mrpt_sensor_gnns_nmea`](#mrpt_sensor_gnns_nmea)
 - [`mrpt_sensor_imu_taobotics`](#mrpt_sensor_imu_taobotics)
-- [`mrpt_sensor_imu_xsens`](#mrpt_sensor_imu_xsens)
 - [`mrpt_sensor_velodyne`](#mrpt_sensor_velodyne)
 - [Individual package build status](#individual-package-build-status)
 
@@ -266,86 +265,6 @@ Arguments (pass arguments as '<name>:=<value>'):
 </details>
 
 
-# `mrpt_sensor_imu_xsens`
-
-Supported models: MT4
-
-```bash
-ros2 launch mrpt_sensor_imu_xsens mrpt_sensor_imu_xsens.launch.py
-```
-
-<details>
-  <summary>Launch arguments</summary>
-
-```yaml
-ros2 launch mrpt_sensor_imu_xsens mrpt_sensor_imu_xsens.launch.py --show-args
-Arguments (pass arguments as '<name>:=<value>'):
-
-    'process_rate':
-        Rate (Hz) for the process() main sensor loop.
-        (default: '"120"')
-
-    'out_rawlog_prefix':
-        If not empty, a .rawlog file will be created with all recorded data, apart of publishing it as ROS messages.
-        (default: '')
-
-    'publish_mrpt_obs_topic':
-        If not empty, mrpt_msgs/GenericObservation messages will be published to this topic name with the binary serialization of mrtp::obs::CObservation objects from the sensor.
-        (default: '')
-
-    'publish_topic':
-        If not empty, messages of type sensor_msg/Imu will be published to this topic for each sensor observation.
-        (default: 'sensor')
-
-    'sensor_frame_id':
-        The sensor frame_id name. Used to populate msg header and to publish to /tf too.
-        (default: 'imu')
-
-    'robot_frame_id':
-        The robot frame_id name. Used to publish the sensor pose to /tf.
-        (default: 'base_link')
-
-    'sensor_label':
-        The sensorLabel field of mrpt::obs::CObservation: a "name" for the sensor.
-        (default: 'sensor')
-
-    'port_name':
-        Serial port to open, like USB002:005, etc. Default: open first IMU device.
-        (default: '')
-
-    'sensor_pose_x':
-        Sensor pose coordinate on the vehicle frame.
-        (default: '"0.0"')
-
-    'sensor_pose_y':
-        Sensor pose coordinate on the vehicle frame.
-        (default: '"0.0"')
-
-    'sensor_pose_z':
-        Sensor pose coordinate on the vehicle frame.
-        (default: '"0.0"')
-
-    'sensor_pose_yaw':
-        Sensor pose coordinate on the vehicle frame (degrees).
-        (default: '"0.0"')
-
-    'sensor_pose_pitch':
-        Sensor pose coordinate on the vehicle frame (degrees).
-        (default: '"0.0"')
-
-    'sensor_pose_roll':
-        Sensor pose coordinate on the vehicle frame (degrees).
-        (default: '"0.0"')
-
-    'log_level':
-        Logging level
-        (default: 'INFO')
-
-```
-</details>
-
-
-
 # `mrpt_sensor_velodyne`
 
 Supported models: `VLP16`,`HDL32`,`HDL64`
@@ -365,6 +284,5 @@ TODO: Document and explain parameters.
 | mrpt_sensor_bumblebee_stereo | [![Build Status](https://build.ros2.org/job/Hbin_uJ64__mrpt_sensor_bumblebee_stereo__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Hbin_uJ64__mrpt_sensor_bumblebee_stereo__ubuntu_jammy_amd64__binary/) | [![Build Status](https://build.ros2.org/job/Ibin_uJ64__mrpt_sensor_bumblebee_stereo__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Ibin_uJ64__mrpt_sensor_bumblebee_stereo__ubuntu_jammy_amd64__binary/)| [![Build Status](https://build.ros2.org/job/Rbin_uN64__mrpt_sensor_bumblebee_stereo__ubuntu_noble_amd64__binary/badge/icon)](https://build.ros2.org/job/Rbin_uN64__mrpt_sensor_bumblebee_stereo__ubuntu_noble_amd64__binary/) |
 | mrpt_sensor_gnns_nmea | [![Build Status](https://build.ros2.org/job/Hbin_uJ64__mrpt_sensor_gnns_nmea__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Hbin_uJ64__mrpt_sensor_gnns_nmea__ubuntu_jammy_amd64__binary/) | [![Build Status](https://build.ros2.org/job/Ibin_uJ64__mrpt_sensor_gnns_nmea__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Ibin_uJ64__mrpt_sensor_gnns_nmea__ubuntu_jammy_amd64__binary/)| [![Build Status](https://build.ros2.org/job/Rbin_uN64__mrpt_sensor_gnns_nmea__ubuntu_noble_amd64__binary/badge/icon)](https://build.ros2.org/job/Rbin_uN64__mrpt_sensor_gnns_nmea__ubuntu_noble_amd64__binary/) |
 | mrpt_sensor_imu_taobotics | [![Build Status](https://build.ros2.org/job/Hbin_uJ64__mrpt_sensor_imu_taobotics__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Hbin_uJ64__mrpt_sensor_imu_taobotics__ubuntu_jammy_amd64__binary/) | [![Build Status](https://build.ros2.org/job/Ibin_uJ64__mrpt_sensor_imu_taobotics__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Ibin_uJ64__mrpt_sensor_imu_taobotics__ubuntu_jammy_amd64__binary/)| [![Build Status](https://build.ros2.org/job/Rbin_uN64__mrpt_sensor_imu_taobotics__ubuntu_noble_amd64__binary/badge/icon)](https://build.ros2.org/job/Rbin_uN64__mrpt_sensor_imu_taobotics__ubuntu_noble_amd64__binary/) |
-| mrpt_sensor_imu_xsens | [![Build Status](https://build.ros2.org/job/Hbin_uJ64__mrpt_sensor_imu_xsens__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Hbin_uJ64__mrpt_sensor_imu_xsens__ubuntu_jammy_amd64__binary/) | [![Build Status](https://build.ros2.org/job/Ibin_uJ64__mrpt_sensor_imu_xsens__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Ibin_uJ64__mrpt_sensor_imu_xsens__ubuntu_jammy_amd64__binary/)| [![Build Status](https://build.ros2.org/job/Rbin_uN64__mrpt_sensor_imu_xsens__ubuntu_noble_amd64__binary/badge/icon)](https://build.ros2.org/job/Rbin_uN64__mrpt_sensor_imu_xsens__ubuntu_noble_amd64__binary/) |
 | mrpt_sensorlib | [![Build Status](https://build.ros2.org/job/Hbin_uJ64__mrpt_sensorlib__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Hbin_uJ64__mrpt_sensorlib__ubuntu_jammy_amd64__binary/) | [![Build Status](https://build.ros2.org/job/Ibin_uJ64__mrpt_sensorlib__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Ibin_uJ64__mrpt_sensorlib__ubuntu_jammy_amd64__binary/)| [![Build Status](https://build.ros2.org/job/Rbin_uN64__mrpt_sensorlib__ubuntu_noble_amd64__binary/badge/icon)](https://build.ros2.org/job/Rbin_uN64__mrpt_sensorlib__ubuntu_noble_amd64__binary/) |
 | mrpt_sensors | [![Build Status](https://build.ros2.org/job/Hbin_uJ64__mrpt_sensors__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Hbin_uJ64__mrpt_sensors__ubuntu_jammy_amd64__binary/) | [![Build Status](https://build.ros2.org/job/Ibin_uJ64__mrpt_sensors__ubuntu_jammy_amd64__binary/badge/icon)](https://build.ros2.org/job/Ibin_uJ64__mrpt_sensors__ubuntu_jammy_amd64__binary/)| [![Build Status](https://build.ros2.org/job/Rbin_uN64__mrpt_sensors__ubuntu_noble_amd64__binary/badge/icon)](https://build.ros2.org/job/Rbin_uN64__mrpt_sensors__ubuntu_noble_amd64__binary/) |
