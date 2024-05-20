@@ -25,6 +25,12 @@ ROS 2 node for Bumblebee Stereo Cameras using libdc1394 interface.
 Supported models: Bumblebee2 stereo cameras with FireWire connection.
 
 ```bash
+# INSTALL:
+sudo apt install ros-humble-mrpt-sensor-bumblebee-stereo
+```
+
+```bash
+# Launch to test it:
 ros2 launch mrpt_sensor_bumblebee_stereo mrpt_sensor_bumblebee_stereo.launch.py
 ```
 
@@ -111,6 +117,12 @@ Arguments (pass arguments as '<name>:=<value>'):
 Supported models: any GPS/GNNS sensor emiting NMEA messages via a serial/USB port.
 
 ```bash
+# INSTALL:
+sudo apt install ros-humble-mrpt-sensor-gnns-nmea
+```
+
+```bash
+# Launch to test it:
 ros2 launch mrpt_sensor_gnns_nmea mrpt_sensor_gnns_nmea.launch.py serial_port:=/dev/ttyACM0 publish_topic:="/gps"
 ```
 
@@ -188,6 +200,12 @@ Arguments (pass arguments as '<name>:=<value>'):
 Supported models: `hfi-b6`, `hfi-a9`
 
 ```bash
+# INSTALL:
+sudo apt install ros-humble-mrpt-sensor-imu-taobotics
+```
+
+```bash
+# Launch to test it:
 ros2 launch mrpt_sensor_imu_taobotics mrpt_sensor_imu_taobotics.launch.py serial_port:=/dev/ttyUSB0
 ```
 
