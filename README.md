@@ -26,7 +26,7 @@ Supported models: Bumblebee2 stereo cameras with FireWire connection.
 
 ```bash
 # INSTALL:
-sudo apt install ros-humble-mrpt-sensor-bumblebee-stereo
+sudo apt install ros-${ROS_DISTRO}-mrpt-sensor-bumblebee-stereo
 ```
 
 ```bash
@@ -118,7 +118,8 @@ Supported models: any GPS/GNNS sensor emiting NMEA messages via a serial/USB por
 
 ```bash
 # INSTALL:
-sudo apt install ros-humble-mrpt-sensor-gnns-nmea
+sudo apt install ros-${ROS_DISTRO}-mrpt-sensor-gnns-nmea
+
 ```
 
 ```bash
@@ -201,7 +202,7 @@ Supported models: `hfi-b6`, `hfi-a9`
 
 ```bash
 # INSTALL:
-sudo apt install ros-humble-mrpt-sensor-imu-taobotics
+sudo apt install ros-${ROS_DISTRO}-mrpt-sensor-imu-taobotics
 ```
 
 ```bash
