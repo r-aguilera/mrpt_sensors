@@ -2,6 +2,11 @@
 Changelog for package mrpt_sensor_gnns_nmea
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add parameter to set the sensorLabel of generated observations
+* Contributors: Jose Luis Blanco-Claraco
+
 0.1.0 (2024-03-28)
 ------------------
 * publish sensor pose to /tf
