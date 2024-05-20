@@ -2,8 +2,8 @@
 Changelog for package mrpt_sensorlib
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.0 (2024-05-20)
+------------------
 * FIX: Implement the missing "saveToRawlog" feature
 * Add parameter to set the sensorLabel of generated observations
 * Limit publication of /tf sensor poses to a maximum configurable rate

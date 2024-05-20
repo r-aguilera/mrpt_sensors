@@ -2,8 +2,8 @@
 Changelog for package mrpt_sensor_bumblebee_stereo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.0 (2024-05-20)
+------------------
 * Add parameter to set the sensorLabel of generated observations
 * BUGFIX: Wrong parsing of sensor "roll" angle from ros2 params
 * add XSens IMU sensor driver wrapper

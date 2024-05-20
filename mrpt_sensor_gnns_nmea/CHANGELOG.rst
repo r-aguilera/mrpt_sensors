@@ -2,8 +2,8 @@
 Changelog for package mrpt_sensor_gnns_nmea
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.0 (2024-05-20)
+------------------
 * Add parameter to set the sensorLabel of generated observations
 * Contributors: Jose Luis Blanco-Claraco
 
