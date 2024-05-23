@@ -8,7 +8,11 @@
 
 #include <mrpt/core/bits_math.h>  // square()
 #include <mrpt/ros2bridge/gps.h>
+#include <mrpt/ros2bridge/time.h>
 
+#include <nmea_msgs/msg/gpgga.hpp>
+#include <nmea_msgs/msg/gpgsa.hpp>
+#include <nmea_msgs/msg/gprmc.hpp>
 #include <rclcpp/rclcpp.hpp>
 
 #include "mrpt_sensorlib/mrpt_sensorlib.h"
@@ -69,6 +73,47 @@ double VDOP = 5.0;
 // https://www.gps-forums.com/threads/roughtly-converting-dop-to-metric-error.40105/
 constexpr double UERE = (6.7 / 3.0) * 2 /*conservative!*/;  // [m]
 
+// Declare the GNNS NMEA publishers here so we don't populate the base class
+// with non-generic publishers:
+struct NMEA_Pubs
+{
+   public:
+    static NMEA_Pubs& Instance()
+    {
+        static NMEA_Pubs obj;
+        return obj;
+    }
+
+    rclcpp::Publisher<nmea_msgs::msg::Gpgga>::SharedPtr pub_gga_;
+    rclcpp::Publisher<nmea_msgs::msg::Gpgsa>::SharedPtr pub_gsa_;
+    rclcpp::Publisher<nmea_msgs::msg::Gprmc>::SharedPtr pub_rmc_;
+
+    void ensure_pubs_are_created(
+        rclcpp::Node& node, const std::string& publish_topic)
+    {
+        using namespace std::string_literals;
+
+        pub_gga_ = node.create_publisher<nmea_msgs::msg::Gpgga>(
+            publish_topic + "_gga"s, rclcpp::SystemDefaultsQoS());
+
+        pub_gsa_ = node.create_publisher<nmea_msgs::msg::Gpgsa>(
+            publish_topic + "_gsa"s, rclcpp::SystemDefaultsQoS());
+
+        pub_rmc_ = node.create_publisher<nmea_msgs::msg::Gprmc>(
+            publish_topic + "_rmc"s, rclcpp::SystemDefaultsQoS());
+    }
+
+    void on_shutdown()
+    {
+        pub_gga_.reset();
+        pub_gsa_.reset();
+        pub_rmc_.reset();
+    }
+
+   private:
+    NMEA_Pubs() = default;
+};
+
 // We will emit one ROS message per GGA NMEA frame.
 // toROS() below will return false if there is NO GGA frame.
 // But we want to keep an eye on other NMEA frames to learn about
@@ -80,14 +125,50 @@ void process_gps(
     auto o = std::dynamic_pointer_cast<mrpt::obs::CObservationGPS>(obs);
     ASSERT_(o);
 
+    auto& pubs = NMEA_Pubs::Instance();
+    std_msgs::msg::Header msgHeader;
+    msgHeader.frame_id = node.sensor_frame_id();
+    msgHeader.stamp = mrpt::ros2bridge::toROS(obs->timestamp);
+
     // process messages:
+
+    // ------------------------------------------------------------------------
+    // GGA
+    // ------------------------------------------------------------------------
     if (auto gga = o->getMsgByClassPtr<mrpt::obs::gnss::Message_NMEA_GGA>();
         gga)
     {
         // gga->fields.UTCTime // useful?
         HDOP = gga->fields.HDOP;
+
+        // publish it:
+        nmea_msgs::msg::Gpgga m;
+        m.header = msgHeader;
+        m.utc_seconds = gga->fields.UTCTime.sec;  // ?
+
+        // The measured latitude, in degrees (North:+ , South:-)
+        m.lat = std::abs(gga->fields.latitude_degrees);
+        m.lat_dir = gga->fields.latitude_degrees > 0 ? "N" : "S";
+
+        // The measured longitude, in degrees (East:+ , West:-)
+        m.lon = std::abs(gga->fields.longitude_degrees);
+        m.lon_dir = gga->fields.longitude_degrees > 0 ? "E" : "W";
+
+        m.gps_qual = gga->fields.fix_quality;
+        m.num_sats = gga->fields.satellitesUsed;
+        m.hdop = gga->fields.HDOP;
+        m.alt = gga->fields.altitude_meters;
+        m.altitude_units = "m";
+
+        m.undulation = gga->fields.geoidal_distance;
+        m.undulation_units = "m";
+
+        pubs.pub_gga_->publish(m);
     }
 
+    // ------------------------------------------------------------------------
+    // GSA
+    // ------------------------------------------------------------------------
     if (auto gsa = o->getMsgByClassPtr<mrpt::obs::gnss::Message_NMEA_GSA>();
         gsa)
     {
@@ -111,12 +192,68 @@ void process_gps(
         RCLCPP_DEBUG_THROTTLE(
             node.get_logger(), *node.get_clock(), 5000,
             "GSA frame: %zu satellites used in solution.", numUsedSats);
+
+        // publish it:
+        nmea_msgs::msg::Gpgsa m;
+        m.header = msgHeader;
+        m.auto_manual_mode = gsa->fields.auto_selection_fix;
+        m.fix_mode = gsa->fields.fix_2D_3D;
+        for (size_t i = 0;
+             i < sizeof(gsa->fields.PRNs) / sizeof(gsa->fields.PRNs[0]); i++)
+        {
+            if (!gsa->fields.PRNs[i][0]) break;
+
+            std::string s;
+            s.resize(2);
+            s[0] = gsa->fields.PRNs[i][0];
+            s[1] = gsa->fields.PRNs[i][1];
+            m.sv_ids.push_back(std::stoi(s.c_str()));
+        }
+
+        m.hdop = gsa->fields.HDOP;
+        m.vdop = gsa->fields.VDOP;
+        m.pdop = gsa->fields.PDOP;
+
+        pubs.pub_gsa_->publish(m);
     }
+
+    // ------------------------------------------------------------------------
+    // RMC
+    // ------------------------------------------------------------------------
     if (auto rmc = o->getMsgByClassPtr<mrpt::obs::gnss::Message_NMEA_RMC>();
         rmc)
     {
         // rmc->fields.speed_knots // publish?
         // rmc->getDateAsTimestamp() // Useful to publish to ROS?
+
+        // publish it:
+        nmea_msgs::msg::Gprmc m;
+        m.header = msgHeader;
+        m.utc_seconds = rmc->fields.UTCTime.sec;  // ??
+
+        // The measured latitude, in degrees (North:+ , South:-)
+        m.lat = std::abs(rmc->fields.latitude_degrees);
+        m.lat_dir = rmc->fields.latitude_degrees > 0 ? "N" : "S";
+
+        // The measured longitude, in degrees (East:+ , West:-)
+        m.lon = std::abs(rmc->fields.longitude_degrees);
+        m.lon_dir = rmc->fields.longitude_degrees > 0 ? "E" : "W";
+
+        m.speed = rmc->fields.speed_knots;
+        m.date = mrpt::format(
+            "%02u/%02u/%02u", static_cast<unsigned int>(rmc->fields.date_day),
+            static_cast<unsigned int>(rmc->fields.date_month),
+            static_cast<unsigned int>(rmc->fields.date_year));
+
+        // Magnetic variation direction (East:+, West:-)
+        m.mag_var = std::abs(rmc->fields.magnetic_dir);
+        m.mag_var_direction = rmc->fields.magnetic_dir > 0 ? "E" : "W";
+
+        // m.track = ??;
+        m.position_status = rmc->fields.validity_char;
+        m.mode_indicator = rmc->fields.positioning_mode;
+
+        pubs.pub_rmc_->publish(m);
     }
 
     // publish them:
@@ -183,6 +320,9 @@ int main(int argc, char** argv)
             "SENSOR");
 
         node->run();
+
+        auto& pubs = NMEA_Pubs::Instance();
+        pubs.on_shutdown();
 
         rclcpp::shutdown();
         return 0;

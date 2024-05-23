@@ -23,6 +23,7 @@
   <depend>mrpt2</depend>
   <depend>mrpt_msgs</depend>
   <depend>mrpt_sensorlib</depend>
+  <depend>nmea_msgs</depend>
 
   <depend>ament_lint_common</depend>
   <depend>ament_lint_auto</depend>
