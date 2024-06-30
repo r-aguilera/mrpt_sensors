@@ -197,6 +197,149 @@ Arguments (pass arguments as '<name>:=<value>'):
 </details>
 
 
+# `mrpt_sensor_gnns_novatel`
+
+ROS node for GNNS/IMU Novatel receivers with RTK precision using an NTRIP HTTP source.
+This node actually launches two mrpt::hwdrivers sensors: 
+
+- mrpt::hwdrivers::CGPSInterface for the Novatel GNNS/INS device, and
+- mrpt::hwdrivers::CNTRIPEmitter to connect to a remove NTRIP source and emit the received corrections via a serial port.
+
+Thus, you need to specify several mandatory ros launch arguments to make this node to work, 
+including the Novatel serial (USB) ports, the NTRIP server configuration, etc.
+
+Supported models: Novatel OEM6
+
+```bash
+# INSTALL:
+sudo apt install ros-${ROS_DISTRO}-mrpt-sensor-gnns-novatel
+```
+
+```bash
+# Launch to test it:
+ros2 launch mrpt_sensor_gnns_novatel mrpt_sensor_gnns_novatel.launch.py \
+    publish_topic:="/gps_novatel" \
+    publish_mrpt_obs_topic:="/gps_novatel_mrpt" \
+    sensor_frame_id:="novatel" \
+    sensor_label:="novatel" \
+    novatel_main_serial_port:="/dev/serial/by-id/usb-Novatel_Inc._Novatel_GPS_Receiver_BJYA15400456J-if00-port0" \
+    novatel_ntrip_serial_port:="/dev/serial/by-id/usb-Novatel_Inc._Novatel_GPS_Receiver_BJYA15400456J-if00-port2" \
+    ntrip_server:="www.euref-ip.net" \
+    ntrip_port:="\"2101\"" \
+    ntrip_mount_point:="ALME00ESP0" \
+    ntrip_user:="user" \
+    ntrip_password:="pass" \
+    novatel_init_azimuth:="0.0 25.0"
+
+```
+
+<details>
+  <summary>Launch arguments</summary>
+
+```yaml
+ros2 launch mrpt_sensor_gnns_novatel mrpt_sensor_gnns_novatel.launch.py --show-args
+Arguments (pass arguments as '<name>:=<value>'):
+
+    'process_rate':
+        Rate (Hz) for the process() main sensor loop.
+        (default: '"50"')
+
+    'out_rawlog_prefix':
+        If not empty, a .rawlog file will be created with all recorded data, apart of publishing it as ROS messages.
+        (default: '')
+
+    'publish_mrpt_obs_topic':
+        If not empty, mrpt_msgs/GenericObservation messages will be published to this topic name with the binary serialization of mrtp::obs::CObservation objects from the sensor.
+        (default: '')
+
+    'publish_topic':
+        If not empty, messages of the appropriate type will be published to this topic for each sensor observation.
+        (default: 'sensor')
+
+    'sensor_frame_id':
+        The sensor frame_id name. Used to populate msg header and to publish to /tf too.
+        (default: 'sensor')
+
+    'robot_frame_id':
+        The robot frame_id name. Used to publish the sensor pose to /tf.
+        (default: 'base_link')
+
+    'sensor_label':
+        The sensorLabel field of mrpt::obs::CObservation: a "name" for the sensor.
+        (default: 'sensor')
+
+    'novatel_main_serial_port':
+        Main Novatel comms port
+        (default: '')
+
+    'serial_baud_rate':
+        Serial port baud rate (typ: 4800, 9600, etc.)
+        (default: '"4800"')
+
+    'raw_dump_file':
+        If not empty, raw GNNS data will be dumped to this file.
+        (default: '""')
+
+    'novatel_imu_orientation':
+        See Novatel docs for SETIMUORIENTATION.
+        (default: '"6"')
+
+    'novatel_veh_body_rotation':
+        See Novatel docs for VEHICLEBODYROTATION.
+        (default: '"0.000000 0.000000 90.000000 0.000000 0.000000 0.000000"')
+
+    'novatel_imu_to_ant_offset':
+        See Novatel docs for SETIMUTOANTOFFSET.
+        (default: '"-0.28 -0.08 -0.01 0.000000 0.000000 0.000000"')
+
+    'novatel_ins_offset':
+        See Novatel docs for SETINSOFFSET.
+        (default: '"0.000000 0.000000 0.000000"')
+
+    'novatel_init_azimuth':
+        See Novatel docs for SETINITAZIMUTH.
+        (default: '"0.000000 25.000000"')
+
+    'ntrip_server':
+        DNS or IP of the NTRIP server.
+        (default: '"www.euref-ip.net"')
+
+    'ntrip_port':
+        TCP port for connecting to the NTRIP server.
+        (default: '"2101"')
+
+    'ntrip_mount_point':
+        Mount point to connect inside the NTRIP server.
+        (default: '"ALME00ESP0"')
+
+    'ntrip_user':
+        NTRIP server username.
+        (default: '""')
+
+    'ntrip_password':
+        NTRIP server password.
+        (default: '""')
+
+    'sensor_pose_x':
+        Sensor pose coordinate on the vehicle frame.
+        (default: '"0.0"')
+
+    'sensor_pose_y':
+        Sensor pose coordinate on the vehicle frame.
+        (default: '"0.0"')
+
+    'sensor_pose_z':
+        Sensor pose coordinate on the vehicle frame.
+        (default: '"0.0"')
+
+    'log_level':
+        Logging level
+        (default: 'INFO')
+
+```
+</details>
+
+
 # `mrpt_sensor_imu_taobotics`
 
 Supported models: `hfi-b6`, `hfi-a9`

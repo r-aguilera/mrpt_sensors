@@ -106,9 +106,8 @@ int main(int argc, char** argv)
             std::make_shared<mrpt_sensors::GenericSensorNode>(node_name);
 
         node->custom_process_sensor =
-            [&node](const mrpt::obs::CObservation::Ptr& o) {
-                process_stereo(*node, o);
-            };
+            [&node](const mrpt::obs::CObservation::Ptr& o)
+        { process_stereo(*node, o); };
 
         node->init(
             sensorConfig,
@@ -132,7 +131,7 @@ int main(int argc, char** argv)
                 {"sensor_pose_pitch", "SENSOR_POSE_PITCH", "0", false},
                 {"sensor_pose_roll", "SENSOR_POSE_ROLL", "0", false},
             },
-            "SENSOR");
+            {"SENSOR"});
 
         node->run();
 

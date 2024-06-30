@@ -317,7 +317,7 @@ int main(int argc, char** argv)
                 {"sensor_pose_y", "SENSOR_POSE_Y", "0", false},
                 {"sensor_pose_z", "SENSOR_POSE_Z", "0", false},
             },
-            "SENSOR");
+            {"SENSOR"});
 
         node->run();
 

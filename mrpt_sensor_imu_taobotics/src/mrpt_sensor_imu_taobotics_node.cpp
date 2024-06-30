@@ -63,7 +63,7 @@ int main(int argc, char** argv)
                 {"sensor_pose_pitch", "SENSOR_POSE_PITCH", "0", false},
                 {"sensor_pose_roll", "SENSOR_POSE_ROLL", "0", false},
             },
-            "SENSOR");
+            {"SENSOR"});
 
         node->run();
 
