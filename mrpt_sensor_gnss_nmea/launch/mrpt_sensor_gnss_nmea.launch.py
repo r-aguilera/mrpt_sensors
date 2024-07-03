@@ -97,9 +97,9 @@ def generate_launch_description():
 
         # Node to launch the mrpt_generic_sensor_node
         Node(
-            package='mrpt_sensor_gnns_nmea',
-            executable='mrpt_sensor_gnns_nmea_node',
-            name='mrpt_sensor_gnns_nmea',
+            package='mrpt_sensor_gnss_nmea',
+            executable='mrpt_sensor_gnss_nmea_node',
+            name='mrpt_sensor_gnss_nmea',
             output='screen',
             arguments=['--ros-args', '--log-level',
                        LaunchConfiguration('log_level')],

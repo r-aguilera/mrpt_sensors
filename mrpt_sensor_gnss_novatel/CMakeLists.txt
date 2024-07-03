@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(mrpt_sensor_gnns_nmea)
+project(mrpt_sensor_gnss_novatel)
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
@@ -9,7 +9,6 @@ find_package(mrpt_sensorlib REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
-find_package(nmea_msgs REQUIRED)
 
 find_package(mrpt_msgs REQUIRED)
 find_package(mrpt-ros2bridge REQUIRED)
@@ -33,7 +32,6 @@ ament_target_dependencies(
   tf2
   tf2_ros
   tf2_geometry_msgs
-  nmea_msgs
 )
 
 #############

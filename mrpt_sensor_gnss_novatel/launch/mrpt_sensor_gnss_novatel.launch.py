@@ -80,7 +80,7 @@ def generate_launch_description():
         DeclareLaunchArgument(
             'raw_dump_file',
             default_value='""',
-            description='If not empty, raw GNNS data will be dumped to this file.'
+            description='If not empty, raw GNSS data will be dumped to this file.'
         ),
 
         DeclareLaunchArgument(
@@ -158,9 +158,9 @@ def generate_launch_description():
 
         # Node to launch the mrpt_generic_sensor_node
         Node(
-            package='mrpt_sensor_gnns_novatel',
-            executable='mrpt_sensor_gnns_novatel_node',
-            name='mrpt_sensor_gnns_novatel',
+            package='mrpt_sensor_gnss_novatel',
+            executable='mrpt_sensor_gnss_novatel_node',
+            name='mrpt_sensor_gnss_novatel',
             output='screen',
             arguments=['--ros-args', '--log-level',
                        LaunchConfiguration('log_level')],

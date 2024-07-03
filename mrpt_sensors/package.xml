@@ -15,10 +15,10 @@
   <depend>mrpt_generic_sensor</depend>
 
   <!-- Specific sensor packages: -->
-  <depend>mrpt_sensor_gnns_nmea</depend>
+  <depend>mrpt_sensor_gnss_nmea</depend>
   <depend>mrpt_sensor_bumblebee_stereo</depend>
   <depend>mrpt_sensor_imu_taobotics</depend>
-  <depend>mrpt_sensor_gnns_novatel</depend>
+  <depend>mrpt_sensor_gnss_novatel</depend>
 
 
 

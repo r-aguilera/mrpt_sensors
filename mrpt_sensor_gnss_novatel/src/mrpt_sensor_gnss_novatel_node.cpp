@@ -14,7 +14,7 @@
 
 #include "mrpt_sensorlib/mrpt_sensorlib.h"
 
-const char* node_name = "mrpt_sensor_gnns_novatel";
+const char* node_name = "mrpt_sensor_gnss_novatel";
 const char* sensorConfig = R""""(
 # Configuration INI file block for mrpt-hwdrivers sensor.
 # Read more online:

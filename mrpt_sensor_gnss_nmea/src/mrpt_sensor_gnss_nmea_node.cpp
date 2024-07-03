@@ -17,7 +17,7 @@
 
 #include "mrpt_sensorlib/mrpt_sensorlib.h"
 
-const char* node_name = "mrpt_sensor_gnns_nmea";
+const char* node_name = "mrpt_sensor_gnss_nmea";
 const char* sensorConfig = R""""(
 # Configuration INI file block for mrpt-hwdrivers sensor.
 # Read more online:
@@ -32,7 +32,7 @@ COM_port_WIN = ${SERIAL_PORT}
 COM_port_LIN = ${SERIAL_PORT}
 baudRate     = ${SERIAL_BAUD_RATE}   // The baudrate of the communications (typ. 4800 or 9600 bauds)
 
-# (Default:true) Whether to append the GNNS message type to CObservation `sensorLabel` field
+# (Default:true) Whether to append the GNSS message type to CObservation `sensorLabel` field
 sensor_label_append_msg_type = true
 
 # Select a parser for GNSS data:
@@ -73,7 +73,7 @@ double VDOP = 5.0;
 // https://www.gps-forums.com/threads/roughtly-converting-dop-to-metric-error.40105/
 constexpr double UERE = (6.7 / 3.0) * 2 /*conservative!*/;  // [m]
 
-// Declare the GNNS NMEA publishers here so we don't populate the base class
+// Declare the GNSS NMEA publishers here so we don't populate the base class
 // with non-generic publishers:
 struct NMEA_Pubs
 {
