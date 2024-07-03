@@ -2,8 +2,8 @@
 Changelog for package mrpt_sensorlib
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.1 (2024-07-03)
+------------------
 * Publish NMEA ROS2 native msgs: GGA, GSA, RMC
 * Contributors: Jose Luis Blanco-Claraco
 

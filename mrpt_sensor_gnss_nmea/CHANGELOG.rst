@@ -2,8 +2,8 @@
 Changelog for package mrpt_sensor_gnss_nmea
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.1 (2024-07-03)
+------------------
 * Fix typo in GNSS names
 * Contributors: Jose Luis Blanco-Claraco
 

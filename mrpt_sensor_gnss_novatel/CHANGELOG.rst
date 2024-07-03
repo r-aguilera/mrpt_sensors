@@ -2,5 +2,5 @@
 Changelog for package mrpt_sensor_gnss_novatel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+0.2.1 (2024-07-03)
+------------------
