@@ -2,6 +2,11 @@
 Changelog for package mrpt_sensorlib
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Publish NMEA ROS2 native msgs: GGA, GSA, RMC
+* Contributors: Jose Luis Blanco-Claraco
+
 0.2.0 (2024-05-20)
 ------------------
 * FIX: Implement the missing "saveToRawlog" feature

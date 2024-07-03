@@ -2,6 +2,9 @@
 Changelog for package mrpt_sensor_imu_taobotics
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+
 0.2.0 (2024-05-20)
 ------------------
 * fix docs typos

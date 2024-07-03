@@ -2,6 +2,11 @@
 Changelog for package mrpt_sensor_gnss_nmea
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix typo in GNSS names
+* Contributors: Jose Luis Blanco-Claraco
+
 0.2.0 (2024-05-20)
 ------------------
 * Add parameter to set the sensorLabel of generated observations

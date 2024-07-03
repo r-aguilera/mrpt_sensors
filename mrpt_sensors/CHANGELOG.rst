@@ -2,6 +2,12 @@
 Changelog for package mrpt_sensors
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fix typo in GNSS names
+* Add new driver for Novatel OEM6 + NTRIP server
+* Contributors: Jose Luis Blanco-Claraco
+
 0.2.0 (2024-05-20)
 ------------------
 

@@ -2,6 +2,11 @@
 Changelog for package mrpt_sensor_bumblebee_stereo
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Add new driver for Novatel OEM6 + NTRIP server
+* Contributors: Jose Luis Blanco-Claraco
+
 0.2.0 (2024-05-20)
 ------------------
 * Add parameter to set the sensorLabel of generated observations
