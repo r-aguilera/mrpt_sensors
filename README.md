@@ -1,3 +1,7 @@
+[![CI Build colcon](https://github.com/mrpt-ros-pkg/mrpt_sensors/actions/workflows/ros-build.yml/badge.svg)](https://github.com/mrpt-ros-pkg/mrpt_sensors/actions/workflows/ros-build.yml)
+[![CI clang-format](https://github.com/mrpt-ros-pkg/mrpt_sensors/actions/workflows/check-clang-format.yml/badge.svg)](https://github.com/mrpt-ros-pkg/mrpt_sensors/actions/workflows/check-clang-format.yml)
+
+
 | Distro | Build dev | Release |
 | --- | --- | --- |
 | ROS 2 Humble (u22.04) | [![Build Status](https://build.ros2.org/job/Hdev__mrpt_sensors__ubuntu_jammy_amd64/badge/icon)](https://build.ros2.org/job/Hdev__mrpt_sensors__ubuntu_jammy_amd64/) | [![Version](https://img.shields.io/ros/v/humble/mrpt_sensors)](https://index.ros.org/search/?term=mrpt_sensors) |
